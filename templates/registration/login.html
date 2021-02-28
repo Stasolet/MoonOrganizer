@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}ыыыы{% endblock title %}
+{% block content %}
+    {%if user.is_authenticated%}
+        <p>Вход выполнен</p>
+    {% else %}
+        <form class="w3-card-4" method="post">
+            {% csrf_token %}
+            <h2 class="w3-container w3-black">Вход</h2>
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for inp in form.visible_fields %}
+                <div class="w3-panel">
+                 {{ inp.label_tag }}
+                {{ inp }}
+                </div>
+            {% endfor %}
+            <input type="hidden" name="next" value={{next}}>
+            <button class="w3-button w3-black" type="submit">Войти</button>
+        </form>
+        <a href="{% url 'core:registration' %}">регистрация</a>
+    {%endif%}
+{% endblock content %}

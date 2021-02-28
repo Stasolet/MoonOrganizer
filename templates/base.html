@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}M__n{% endblock title %}</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body class="w3-grey">
+    <div class="w3-top">
+        <nav id="header" class="w3-bar w3-black">
+            <a class="w3-bar-item w3-button" href="{% url 'core:moon_news' %}">Новости Луны</a>
+            <a class="w3-bar-item w3-button" href="{% url 'core:world_news' %}">Новости мира</a>
+            <div class="w3-dropdown-hover w3-bar-block" >
+                <a class="w3-button" href="{% url 'core:notes' %}">Заметки</a>
+                <div class="w3-dropdown-content w3-black">
+                    <a href="{% url 'core:textnote_create' %}" class="w3-bar-item w3-button">Текстовые</a>
+                    <a href="{% url 'core:filmnote_create' %}" class="w3-bar-item w3-button">Фильмы</a>
+                    <a href="{% url 'core:booknote_create' %}" class="w3-bar-item w3-button">Книги</a>
+                    <a href="{% url 'core:calendarnote_create' %}" class="w3-bar-item w3-button">Календарь</a>
+                    <a href="{% url 'core:reflectionnote_create' %}" class="w3-bar-item w3-button">Рефлексия</a>
+                    <a href="{% url 'core:linknote_create' %}" class="w3-bar-item w3-button">Ссылки</a>
+                </div>
+            </div>
+            {%if user.is_authenticated%}
+            <div class="w3-right w3-dropdown-hover w3-bar-block" >
+                <a class="w3-bar-item w3-button" href = "{% url 'core:profile' %}">Профиль</a>
+                <div class="w3-dropdown-content w3-black" style="right: 0">
+                    <a class="w3-bar-item w3-button" href="{% url 'core:logout' %}">Выйти в окно</a>
+                </div>
+            </div>
+            {% else %}
+                <a class="w3-right w3-bar-item w3-button" href="{% url 'core:login' %}">Войти в окно</a>
+            {% endif %}
+        </nav>
+    </div>
+    <div id="content w3-row" class="w3-container" style="min-height: calc(100vh - 150px);">
+        <br>  
+        <br>
+        {% block content %}{% endblock content %}
+    </div>
+    <div class="w3-display-container w3-black w3-col" id="footer" style="height: 150px;">
+        <p>Moon project</p>
+        <div class="w3-display-bottommiddle w3-center">
+            <div class="w3-small">Stanislaw Emelyanow</div>
+            <div class="w3-small">2021</div>
+        </div>
+    </div>
+</body>
+</html>

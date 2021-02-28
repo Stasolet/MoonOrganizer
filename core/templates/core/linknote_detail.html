@@ -1,0 +1,9 @@
+{% extends 'core/note_detail.html' %}
+{% block note_content %}
+    <a class="w3-button" href="http://{{ object.link }}">
+        {{ object.link }}
+    </a>
+{% endblock note_content %}
+{% block change_url %}
+{% url 'core:linknote_change' pk=object.id %}
+{% endblock change_url %}

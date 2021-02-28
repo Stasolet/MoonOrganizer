@@ -1,0 +1,19 @@
+{% extends 'core/note_detail.html' %}
+{% block note_content %}
+    <div class="w3-card">
+        <h1 class="w3-container">{{ object.notification_time }}</h1>
+
+        <div class="w3-panel">
+            {{ object.start_time }}
+        </div>
+        <div class="w3-panel">
+            {{ object.end_time }}
+        </div>
+        <div class="w3-panel">
+            {{ object.event_description }}
+        </div>
+    </div>
+{% endblock note_content %}
+{% block change_url %}
+{% url 'core:calendarnote_change' pk=object.id %}
+{% endblock change_url %}

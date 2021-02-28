@@ -1,0 +1,12 @@
+{% extends 'core/note_detail.html' %}
+{% block note_content %}
+    <div class="w3-container">
+        <p>Автор: {{ object.book_author }}</p>
+    </div>
+    <div class="w3-container">
+        <p>Жанр: {{ object.genre }}</p>
+    </div>
+{% endblock note_content %}
+{% block change_url %}
+{% url 'core:boocknote_change' pk=object.id %}
+{% endblock change_url %}

@@ -1,0 +1,15 @@
+{% extends 'core/note_detail.html' %}
+{% block note_content %}
+    <div class="w3-container">
+        <p>Режиссёр: {{ object.producer }}</p>
+    </div>
+    <div class="w3-container">
+        <p>Жанр: {{ object.genre }}</p>
+    </div>
+    <div class="w3-container">
+        <p>Длительность: {{ object.duration }}</p>
+    </div>
+{% endblock note_content %}
+{% block change_url %}
+{% url 'core:filmnote_change' pk=object.id %}
+{% endblock change_url %}

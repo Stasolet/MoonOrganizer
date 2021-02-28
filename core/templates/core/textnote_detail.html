@@ -1,0 +1,9 @@
+{% extends 'core/note_detail.html' %}
+{% block note_content %}
+    <div class="w3-panel w3-container">
+        {{ object.text }}
+    </div>
+{% endblock note_content %}
+{% block change_url %}
+{% url 'core:textnote_change' pk=object.id %}
+{% endblock change_url %}

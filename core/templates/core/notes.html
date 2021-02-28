@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="w3-row">
+    <div class="w3-container w3-col m1 l2"></div>
+    <div class="w3-col m10 l8 w3-center">
+        <div id="notes_list" class="w3-container w3-display-container">
+            {% for n in page_obj %}
+                <div class="w3-col m5 l5 w3-topbar w3-border w3-border-black w3-margin">
+                    <a class="w3-container w3-button w3-black" href="{% url n.detail_url  pk=n.id %}">
+                        <h4 class="w3-container">{{ n.title }} </h4>
+                    </a>
+                    <p>{{n.type_name}}</p>
+                    <p>{{n.created}}</p>
+                    <p>{{n.tags}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="w3-container w3-col sm1 l2"></div>
+</div>
+<div class="w3-center">
+    <div class="w3-bar w3-center w3-padding-small w3-round-large w3-black w3-small">
+            {% if page_obj.has_previous %}
+                <a class="w3-button w3-bar-item" href="?page=1">&laquo;</a>
+                <a class="w3-button w3-bar-item" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <div class="w3-bar-item w3-grey w3-badge w3-margin-left w3-margin-right">
+            {{ page_obj.number }}
+            </div>
+            {% if page_obj.has_next %}
+                <a class="w3-button w3-bar-item" href="?page={{ page_obj.next_page_number }}">next</a>
+                <a class="w3-button w3-bar-item" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+            {% endif %}
+    </div>
+</div>
+{% endblock content %}
