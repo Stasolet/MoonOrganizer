@@ -7,13 +7,12 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
 from django.views.generic import ListView
-from django.views.generic.edit import FormView, UpdateView
+from django.views.generic.edit import FormView, UpdateView, DeleteView
 
 from core.models import MoonNews
 from core.models import TextNote, BookNote, LinkNote, FilmNote, ReflectionNote, CalendarNote, AVAILABLE_NOTES
 
 
-# todo delete note
 # todo template for change password
 # todo reset password
 # todo registration
@@ -147,7 +146,40 @@ class ReflectionNoteChange(NoteChange):
 class CalendarNoteChange(NoteChange):
     model = CalendarNote
     form_class = CalendarNoteForm
-# End Notes
+# End Notes change
+
+
+# Notes delete
+class NoteDelete(DeleteView):
+    success_url = reverse_lazy('core:notes')
+    template_name = 'core/delete_note.html'
+
+
+class TextNoteDelete(NoteDelete):
+    model = TextNote
+
+
+class LinkNoteDelete(NoteDelete):
+    model = LinkNote
+
+
+class BookNoteDelete(NoteDelete):
+    model = BookNote
+
+
+class FilmNoteDelete(NoteDelete):
+    model = FilmNote
+
+
+class ReflectionNoteDelete(NoteDelete):
+    model = ReflectionNote
+
+
+class CalendarNoteDelete(NoteDelete):
+    model = CalendarNote
+
+
+# End Notes delete
 
 
 # Notes Watch

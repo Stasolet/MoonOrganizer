@@ -4,7 +4,8 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView,
 from .views import index, world_news, MoonNewsListView, NotesListView, profile,\
     DetailTextNote, DetailLinkNote, DetailBookNote, DetailFilmNote, DetailReflectionNote, DetailCalendarNote,\
     TextNoteAdd, RegistrationUser, FilmNoteAdd, BookNoteAdd, CalendarNoteAdd, ReflectionNoteAdd, LinkNoteAdd,\
-    TextNoteChange, LinkNoteChange, FilmNoteChange, BookNoteChange, ReflectionNoteChange, CalendarNoteChange
+    TextNoteChange, LinkNoteChange, FilmNoteChange, BookNoteChange, ReflectionNoteChange, CalendarNoteChange,\
+    TextNoteDelete, LinkNoteDelete, FilmNoteDelete, BookNoteDelete, ReflectionNoteDelete, CalendarNoteDelete
 
 app_name = 'core'
 
@@ -29,6 +30,12 @@ notes_patterns = [
     path('change/book_note/<int:pk>/', BookNoteChange.as_view(), name='booknote_change'),
     path('change/reflection_note/<int:pk>/', ReflectionNoteChange.as_view(), name='reflectionnote_change'),
     path('change/calendar_note/<int:pk>/', CalendarNoteChange.as_view(), name='calendarnote_change'),
+    path('delete/text_note/<int:pk>/', TextNoteDelete.as_view(), name='textnote_delete'),
+    path('delete/link_note/<int:pk>/', LinkNoteDelete.as_view(), name='linknote_delete'),
+    path('delete/film_note/<int:pk>/', FilmNoteDelete.as_view(), name='filmnote_delete'),
+    path('delete/book_note/<int:pk>/', BookNoteDelete.as_view(), name='booknote_delete'),
+    path('delete/reflection_note/<int:pk>/', ReflectionNoteDelete.as_view(), name='reflectionnote_delete'),
+    path('delete/calendar_note/<int:pk>/', CalendarNoteDelete.as_view(), name='calendarnote_delete'),
 ]
 # change namespace to account
 account_patterns = [
