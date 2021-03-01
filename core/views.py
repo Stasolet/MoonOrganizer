@@ -1,22 +1,25 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.db.models import Value, CharField
 from django.db.models.functions import Left
-from django.forms import ModelForm
+from django import forms
+from django.forms import ModelForm, widgets, ValidationError
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic.edit import FormView, UpdateView, DeleteView
 
 from core.models import MoonNews
 from core.models import TextNote, BookNote, LinkNote, FilmNote, ReflectionNote, CalendarNote, AVAILABLE_NOTES
-
+from django.contrib.auth.forms import UserCreationForm
 
 # todo template for change password
 # todo reset password
 # todo registration
 # todo шаблон для формы с наследованием управлением выводом
+
 
 # Note block
 # Note forms
@@ -236,16 +239,28 @@ class DetailCalendarNote(NoteView):
 
 class DetailReflectionNote(NoteView):
     model = ReflectionNote
-
-
-class RegistrationUser(CreateView):
-    pass
 # End Notes block
 
 
 # User Block
 def profile(request):
     return render(request, 'registration/profile.html')
+
+
+class RegistrationUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
+
+
+class RegistrationUser(FormView):
+    success_url = '/'
+    form_class = RegistrationUserForm
+    template_name = 'registration/registration.html'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 # End User block
 
 

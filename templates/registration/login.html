@@ -10,10 +10,16 @@
             {% for hidden in form.hidden_fields %}
                 {{ hidden }}
             {% endfor %}
+            {% if form.non_field_errors %}
+                <ul>
+                    {% for err in form.non_field_errors %}
+                        <li>{{ err|escape }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             {% for inp in form.visible_fields %}
                 <div class="w3-panel">
-                 {{ inp.label_tag }}
-                {{ inp }}
+                 {{ inp.label_tag }} {{ inp }}
                 </div>
             {% endfor %}
             <input type="hidden" name="next" value={{next}}>
