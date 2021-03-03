@@ -16,7 +16,9 @@
     <div class="w3-container">
         <p>теги: {{object.tags}}</p>
     </div>
-    <a href="{% block change_url %}#{% endblock change_url %}">Изменить</a>
-    <a href="{% block delete_url %}#{% endblock delete_url %}">Удалить</a>
+    <div class="w3-container w3-black">
+        <a class="w3-button" href="{% block change_url %}#{% endblock change_url %}">Изменить</a>
+        <a class="w3-button" href="{% block delete_url %}#{% endblock delete_url %}">Удалить</a>
+    </div>
 </div>
 {% endblock content %}
