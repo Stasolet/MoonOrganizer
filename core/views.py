@@ -2,8 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.db.models import Value, CharField
 from django.db.models.functions import Left
-from django import forms
-from django.forms import ModelForm, widgets, ValidationError
+from django.forms import ModelForm
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -63,7 +62,7 @@ class CalendarNoteForm(ModelForm):
     class Meta:
         form = NoteForm
         model = CalendarNote
-        fields = ['title', 'notification_time', 'event_description','start_time','end_time' ,'tags']
+        fields = ['title', 'notification_time', 'event_description', 'start_time', 'end_time', 'tags']
 
 
 class LinkNoteForm(ModelForm):
