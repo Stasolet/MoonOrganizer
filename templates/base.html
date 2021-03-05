@@ -14,12 +14,12 @@
             <div class="w3-dropdown-hover w3-bar-block" >
                 <a class="w3-button" href="{% url 'core:notes' %}">Заметки</a>
                 <div class="w3-dropdown-content w3-black">
-                    <a href="{% url 'core:textnote_create' %}" class="w3-bar-item w3-button">Текстовые</a>
-                    <a href="{% url 'core:filmnote_create' %}" class="w3-bar-item w3-button">Фильмы</a>
-                    <a href="{% url 'core:booknote_create' %}" class="w3-bar-item w3-button">Книги</a>
-                    <a href="{% url 'core:calendarnote_create' %}" class="w3-bar-item w3-button">Календарь</a>
-                    <a href="{% url 'core:reflectionnote_create' %}" class="w3-bar-item w3-button">Рефлексия</a>
-                    <a href="{% url 'core:linknote_create' %}" class="w3-bar-item w3-button">Ссылки</a>
+                    <a href="{% url 'core:notes' %}?notetype=text" class="w3-bar-item w3-button">Текстовые</a>
+                    <a href="{% url 'core:notes' %}?notetype=film" class="w3-bar-item w3-button">Фильмы</a>
+                    <a href="{% url 'core:notes' %}?notetype=book" class="w3-bar-item w3-button">Книги</a>
+                    <a href="{% url 'core:notes' %}?notetype=calendar" class="w3-bar-item w3-button">Календарные</a>
+                    <a href="{% url 'core:notes' %}?notetype=reflection" class="w3-bar-item w3-button">Рефлексии</a>
+                    <a href="{% url 'core:notes' %}?notetype=link" class="w3-bar-item w3-button">Ссылки</a>
                 </div>
             </div>
             {%if user.is_authenticated%}
@@ -34,9 +34,9 @@
             {% endif %}
         </nav>
     </div>
+    <br>
+    <br>
     <div id="content w3-row" class="w3-container" style="min-height: calc(100vh - 150px);">
-        <br>  
-        <br>
         {% block content %}{% endblock content %}
     </div>
     <div class="w3-display-container w3-black w3-col" id="footer" style="height: 150px;">

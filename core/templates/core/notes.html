@@ -1,22 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="w3-row">
+<div class="w3-row w3-container">
     <div class="w3-container w3-col m1 l2"></div>
     <div class="w3-col m10 l8 w3-center">
-        <div id="notes_list" class="w3-container w3-display-container">
+        <div id="notes_list" class="w3-cell-row">
             {% for n in page_obj %}
-                <div class="w3-col m5 l5 w3-topbar w3-border w3-border-black w3-margin">
-                    <a class="w3-container w3-button w3-black" href="{% url n.detail_url  pk=n.id %}">
-                        <h4 class="w3-container">{{ n.title }} </h4>
+                <div class="w3-col m5 l5 w3-topbar w3-border w3-border-black w3-margin w3-cell">
+                    <a class="w3-container w3-black w3-button" href="{% url n.detail_url  pk=n.id %}">
+                        <h4>{{ n.title }} </h4>
                     </a>
-                    <p>{{n.type_name}}</p>
-                    <p>{{n.created}}</p>
-                    <p>{{n.tags}}</p>
+                    <div>{{n.type_name}}</div>
+                    <div class="w3-cell-row w3-margin-top">
+                        <div class="w3-cell">{{n.created}}</div>
+                        <div class="w3-cell">{{n.tags}}</div>
+                    </div>
                 </div>
             {% endfor %}
         </div>
     </div>
-    <div class="w3-container w3-col sm1 l2"></div>
+    <div class="w3-container w3-col sm1 l2 w3-margin-top">
+        <div class="w3-bar-block w3-border w3-border-black w3-topbar">
+            <div class="w3-bar-item w3-black">Добавить заметку</div>
+            <a href="{% url 'core:textnote_create' %}" class="w3-bar-item w3-button w3-hover-black">Текстовая</a>
+            <a href="{% url 'core:filmnote_create' %}" class="w3-bar-item w3-button w3-hover-black">Фильм</a>
+            <a href="{% url 'core:booknote_create' %}" class="w3-bar-item w3-button w3-hover-black">Книга</a>
+            <a href="{% url 'core:calendarnote_create' %}" class="w3-bar-item w3-button w3-hover-black">Календарь</a>
+            <a href="{% url 'core:reflectionnote_create' %}" class="w3-bar-item w3-button w3-hover-black">Рефлексия</a>
+            <a href="{% url 'core:linknote_create' %}" class="w3-bar-item w3-button w3-hover-black">Ссылка</a>
+        </div>
+    </div>
 </div>
 <div class="w3-center">
     <div class="w3-bar w3-center w3-padding-small w3-round-large w3-black w3-small">

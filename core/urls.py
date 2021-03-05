@@ -1,9 +1,9 @@
 from django.urls import path, include
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordResetView
-
-from .views import index, world_news, MoonNewsListView, NotesListView, profile,\
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
+from .views import index, world_news, MoonNewsListView, NotesListView,\
+    profile, RegistrationUser,\
     DetailTextNote, DetailLinkNote, DetailBookNote, DetailFilmNote, DetailReflectionNote, DetailCalendarNote,\
-    TextNoteAdd, RegistrationUser, FilmNoteAdd, BookNoteAdd, CalendarNoteAdd, ReflectionNoteAdd, LinkNoteAdd,\
+    TextNoteAdd, FilmNoteAdd, BookNoteAdd, CalendarNoteAdd, ReflectionNoteAdd, LinkNoteAdd,\
     TextNoteChange, LinkNoteChange, FilmNoteChange, BookNoteChange, ReflectionNoteChange, CalendarNoteChange,\
     TextNoteDelete, LinkNoteDelete, FilmNoteDelete, BookNoteDelete, ReflectionNoteDelete, CalendarNoteDelete
 
