@@ -189,22 +189,38 @@ class CalendarNoteDelete(NoteDelete):
 class NotesListView(LoginRequiredMixin, ListView):
     paginate_by = 12
     template_name = "core/notes.html"
+    notes = {  # возможно это стоит вынести в глобальное пространство
+        'text': TextNote,
+        'link': LinkNote,
+        'book': BookNote,
+        'film': FilmNote,
+        'reflection': ReflectionNote,
+        'calendar': CalendarNote,
+    }
 
     def get_queryset(self):
         u = self.request.user
-        n = AVAILABLE_NOTES[0].objects\
-            .filter(creator=u)\
-            .order_by()\
-            .annotate(type_name=Value(AVAILABLE_NOTES[0].type_name, output_field=CharField()),
-                      detail_url=Value(AVAILABLE_NOTES[0].detail_url, output_field=CharField()))\
-            .values_list('id', 'title', 'type_name', 'detail_url', 'created', 'updated', 'tags', named=True)
-        query_list = []
-        for m in AVAILABLE_NOTES[1:]:
-            query_list.append(m.objects.filter(creator=u).order_by()
-                              .annotate(type_name=Value(m.type_name, output_field=CharField()),
-                                        detail_url=Value(m.detail_url, output_field=CharField())))
-        n = n.union(*query_list).order_by('updated')
-        return n
+        notetype = self.request.GET.get('notetype')
+        if notetype:
+            notemodel = self.notes[notetype]
+            queryset = notemodel.objects.filter(creator=u).\
+                annotate(type_name=Value(AVAILABLE_NOTES[0].type_name, output_field=CharField())
+                         , detail_url=Value(AVAILABLE_NOTES[0].detail_url, output_field=CharField())).\
+                values_list('id', 'title', 'type_name', 'detail_url', 'created', 'updated', 'tags', named=True)
+        else:
+            queryset = AVAILABLE_NOTES[0].objects\
+                .filter(creator=u)\
+                .order_by()\
+                .annotate(type_name=Value(AVAILABLE_NOTES[0].type_name, output_field=CharField()),
+                          detail_url=Value(AVAILABLE_NOTES[0].detail_url, output_field=CharField()))\
+                .values_list('id', 'title', 'type_name', 'detail_url', 'created', 'updated', 'tags', named=True)
+            query_list = []
+            for m in AVAILABLE_NOTES[1:]:
+                query_list.append(m.objects.filter(creator=u).order_by()
+                                  .annotate(type_name=Value(m.type_name, output_field=CharField()),
+                                            detail_url=Value(m.detail_url, output_field=CharField())))
+            queryset = queryset.union(*query_list).order_by('updated')
+        return queryset
 
 
 class NoteView(DetailView):
