@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.db.models import Value, CharField
 from django.db.models.functions import Left
-from django.forms import ModelForm
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -10,6 +9,7 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic.edit import FormView, UpdateView, DeleteView
 
+from core.forms import TextNoteForm, FilmNoteForm, BookNoteForm, ReflectionNoteForm, CalendarNoteForm, LinkNoteForm
 from core.models import MoonNews
 from core.models import TextNote, BookNote, LinkNote, FilmNote, ReflectionNote, CalendarNote, AVAILABLE_NOTES
 from django.contrib.auth.forms import UserCreationForm
@@ -21,58 +21,6 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 # Note block
-# Note forms
-class NoteForm(ModelForm):
-    class Meta:
-        fields = ['title', 'tags']
-        labels = {'title': 'Заголовок', 'tags': 'теги'}
-
-
-class TextNoteForm(ModelForm):
-    class Meta:
-        form = NoteForm
-        model = TextNote
-        fields = ['title', 'text', 'tags']
-        labels = {'text': 'Текст'}
-
-
-class FilmNoteForm(ModelForm):
-    class Meta:
-        form = NoteForm
-        model = FilmNote
-        fields = ['title', 'genre', 'producer', 'duration', 'tags']
-        labels = {'title': 'Название фильма', 'genre': 'Жанр', 'producer': 'Продюссерв', 'duration': 'Метраж'}
-
-
-class BookNoteForm(ModelForm):
-    class Meta:
-        form = NoteForm
-        model = BookNote
-        fields = ['title', 'genre', 'book_author', 'tags']
-
-
-class ReflectionNoteForm(ModelForm):
-    class Meta:
-        form = NoteForm
-        model = ReflectionNote
-        fields = ['title', 'date', 'reflection', 'tags']
-
-
-class CalendarNoteForm(ModelForm):
-    class Meta:
-        form = NoteForm
-        model = CalendarNote
-        fields = ['title', 'notification_time', 'event_description', 'start_time', 'end_time', 'tags']
-
-
-class LinkNoteForm(ModelForm):
-    class Meta:
-        form = NoteForm
-        model = LinkNote
-        fields = ['title', 'link', 'tags']
-# End Note Forms
-
-
 # Notes Add
 class NoteAdd(LoginRequiredMixin, FormView):
     success_url = reverse_lazy('core:notes')
