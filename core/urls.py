@@ -45,11 +45,20 @@ account_patterns = [
     path('change_password/', PasswordChangeView.as_view(), name='change_password'),
     path('registration/', RegistrationUser.as_view(), name='registration')
 ]
+# change namespace to news
+news_patterns = [
+    path('moon/', MoonNewsListView.as_view(), name='moonnews'),
+    path('moon/add/', MoonNewsAdd.as_view(), name='moonnews_add'),
+    path('moon/detail/<int:pk>/', MoonNewsDetail.as_view(), name='moonnews_detail'),
+    path('moon/change/<int:pk>/', MoonNewsChange.as_view(), name='moonnews_change'),
+    path('moon/delete/<int:pk>/', MoonNewsDelete.as_view(), name='moonnews_delete'),
+    path('world/', world_news, name='worldnews'),
+]
+
 
 urlpatterns = [
     path('', index, name='index'),
-    path('moon_news/', MoonNewsListView.as_view(), name='moon_news'),
-    path('world_news/', world_news, name='world_news'),
+    path('news/', include(news_patterns)),
     path('notes/', include(notes_patterns)),
     path('account/', include(account_patterns))
 ]
