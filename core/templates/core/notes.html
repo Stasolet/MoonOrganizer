@@ -18,8 +18,8 @@
             {% endfor %}
         </div>
     </div>
-    <div class="w3-container w3-col sm1 l2 w3-margin-top">
-        <div class="w3-bar-block w3-border w3-border-black w3-topbar">
+    <div class="w3-container w3-col sm1 l2 w3-margin-top w3-right">
+        <div class="w3-bar-block w3-border w3-border-black w3-topbar w3-right">
             <div class="w3-bar-item w3-black">Добавить заметку</div>
             <a href="{% url 'core:textnote_create' %}" class="w3-bar-item w3-button w3-hover-black">Текстовая</a>
             <a href="{% url 'core:filmnote_create' %}" class="w3-bar-item w3-button w3-hover-black">Фильм</a>
