@@ -5,8 +5,8 @@
     </a>
 {% endblock note_content %}
 {% block change_url %}
-{% url 'core:linknote_change' pk=object.id %}
+{% url 'core:linknote-change' pk=object.id %}
 {% endblock change_url %}
 {% block delete_url %}
-{% url 'core:linknote_delete' pk=object.id %}
+{% url 'core:linknote-delete' pk=object.id %}
 {% endblock delete_url %}

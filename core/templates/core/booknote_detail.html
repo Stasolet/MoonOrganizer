@@ -8,8 +8,8 @@
     </div>
 {% endblock note_content %}
 {% block change_url %}
-{% url 'core:boocknote_change' pk=object.id %}
+{% url 'core:boocknote-change' pk=object.id %}
 {% endblock change_url %}
 {% block delete_url %}
-{% url 'core:booknote_delete' pk=object.id %}
+{% url 'core:booknote-delete' pk=object.id %}
 {% endblock delete_url %}

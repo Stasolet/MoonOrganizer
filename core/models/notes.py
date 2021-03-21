@@ -34,7 +34,7 @@ class TextNote(Note):
     text = models.TextField(verbose_name='содержимое',
                             null=True)
     type_name = 'Текстовая'
-    detail_url = 'core:textnote_detail'
+    detail_url = 'core:textnote-detail'
 
     class Meta:
         verbose_name = 'текстовая заметка'
@@ -47,7 +47,7 @@ class TextNote(Note):
 class LinkNote(Note):
     link = models.URLField()
     type_name = 'Ссылка'
-    detail_url = 'core:linknote_detail'
+    detail_url = 'core:linknote-detail'
 
     class Meta:
         verbose_name = 'полезная ссылка'
@@ -66,7 +66,7 @@ class BookNote(Note):
                              blank=True,
                              null=True)    # возможна замена на что-то
     type_name = 'Книга'
-    detail_url = 'core:booknote_detail'
+    detail_url = 'core:booknote-detail'
 
     class Meta:
         verbose_name = 'книга'
@@ -95,7 +95,7 @@ class FilmNote(Note):
                                         null=True,
                                         blank=True)
     type_name = 'Фильм'
-    detail_url = 'core:filmnote_detail'
+    detail_url = 'core:filmnote-detail'
 
     class Meta:
         verbose_name = 'фильм'
@@ -109,7 +109,7 @@ class ReflectionNote(Note):
     date = models.DateField(verbose_name='дата')
     reflection = models.TextField(verbose_name='рефлексия')
     type_name = 'Рефлексия'
-    detail_url = 'core:reflectionnote_detail'
+    detail_url = 'core:reflectionnote-detail'
 
     class Meta:
         verbose_name = 'рефлексия'
@@ -128,7 +128,7 @@ class CalendarNote(Note):
                                     null=True,
                                     blank=True)
     type_name = 'Календарная'
-    detail_url = 'core:calendarnote_detail'
+    detail_url = 'core:calendarnote-detail'
 
     class Meta:
         verbose_name = 'календарная заметка'

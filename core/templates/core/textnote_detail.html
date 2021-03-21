@@ -5,8 +5,8 @@
     </div>
 {% endblock note_content %}
 {% block change_url %}
-{% url 'core:textnote_change' pk=object.id %}
+{% url 'core:textnote-change' pk=object.id %}
 {% endblock change_url %}
 {% block delete_url %}
-{% url 'core:textnote_delete' pk=object.id %}
+{% url 'core:textnote-delete' pk=object.id %}
 {% endblock delete_url %}
