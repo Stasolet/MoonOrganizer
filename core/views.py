@@ -137,7 +137,7 @@ class CalendarNoteDelete(NoteDelete):
 # todo Для некоторых заметок не требуется детальный вид(ссылки) для рефлексии надо ещё выводить дату рефлексии
 class NotesListView(LoginRequiredMixin, ListView):
     paginate_by = 12
-    template_name = "core/notes.html"
+    template_name = 'core/notes.html'
     notes = {  # возможно это стоит вынести в глобальное пространство
         'text': TextNote,
         'link': LinkNote,
@@ -243,7 +243,7 @@ class MoonNewsListView(ListView):
 
 
 class MoonNewsAdd(PermissionRequiredMixin, FormView):
-    permission_required = "core.add_moonnews"
+    permission_required = 'core.add_moonnews'
     success_url = reverse_lazy('core:moonnews-view')
     form_class = MoonNewsForm
     template_name = 'core/moonnews_form.html'
@@ -260,14 +260,14 @@ class MoonNewsDetail(DetailView):
 
 
 class MoonNewsChange(PermissionRequiredMixin, UpdateView):
-    permission_required = "core.change_moonnews"
+    permission_required = 'core.change_moonnews'
     model = MoonNews
     succes_url = reverse_lazy('core:moonnews-view')
     form_class = MoonNewsForm
 
 
 class MoonNewsDelete(PermissionRequiredMixin, DeleteView):
-    permission_required = "core.delete_moonnews"
+    permission_required = 'core.delete_moonnews'
     success_url = reverse_lazy('core:moonnews-view')
     model = MoonNews
     template_name = 'core/moonnews_delete.html'

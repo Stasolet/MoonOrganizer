@@ -13,7 +13,7 @@ class Note(models.Model):
                                    auto_now=True)
     updated = models.DateTimeField(verbose_name='дата создания',
                                    auto_now_add=True)
-    title = models.CharField(verbose_name="заголовок",
+    title = models.CharField(verbose_name='заголовок',
                              max_length=256)
     tags = models.CharField(verbose_name='теги',
                             max_length=256,
@@ -37,8 +37,8 @@ class TextNote(Note):
     detail_url = 'core:textnote_detail'
 
     class Meta:
-        verbose_name = "текстовая заметка"
-        verbose_name_plural = "текстовые заметки"
+        verbose_name = 'текстовая заметка'
+        verbose_name_plural = 'текстовые заметки'
 
     def get_absolute_url(self):
         return f'note{self.pk}'
@@ -50,18 +50,18 @@ class LinkNote(Note):
     detail_url = 'core:linknote_detail'
 
     class Meta:
-        verbose_name = "полезная ссылка"
-        verbose_name_plural = "полезные ссылки"
+        verbose_name = 'полезная ссылка'
+        verbose_name_plural = 'полезные ссылки'
 
 
 class BookNote(Note):
-    title = models.CharField(verbose_name="название книги",
+    title = models.CharField(verbose_name='название книги',
                              max_length=256)
-    book_author = models.CharField(verbose_name="автор книги",
+    book_author = models.CharField(verbose_name='автор книги',
                                    max_length=200,
                                    blank=True,
                                    null=True)
-    genre = models.CharField(verbose_name="жанр",
+    genre = models.CharField(verbose_name='жанр',
                              max_length=100,
                              blank=True,
                              null=True)    # возможна замена на что-то
@@ -69,8 +69,8 @@ class BookNote(Note):
     detail_url = 'core:booknote_detail'
 
     class Meta:
-        verbose_name = "книга"
-        verbose_name_plural = "книги"
+        verbose_name = 'книга'
+        verbose_name_plural = 'книги'
 
 
 class FilmNote(Note):
@@ -80,13 +80,13 @@ class FilmNote(Note):
         SERIAL = (2, 'Сериал')  # Возможно добавление указание серии и сезона для сериалов
         __empty__ = 'Не выбрано'
 
-    title = models.CharField(verbose_name="название фильма",
+    title = models.CharField(verbose_name='название фильма',
                              max_length=256)
-    producer = models.CharField(verbose_name="режиссёр",
+    producer = models.CharField(verbose_name='режиссёр',
                                 max_length=200,
                                 blank=True,
                                 null=True)
-    genre = models.CharField(verbose_name="жанр",
+    genre = models.CharField(verbose_name='жанр',
                              max_length=100,
                              blank=True,
                              null=True)  # возможна замена на что-то
