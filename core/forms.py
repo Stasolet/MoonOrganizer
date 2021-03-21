@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from core.models import TextNote, FilmNote, BookNote, ReflectionNote, CalendarNote, LinkNote
+from core.models import TextNote, FilmNote, BookNote, ReflectionNote, CalendarNote, LinkNote, MoonNews
 
 
 # Note forms
@@ -53,3 +53,11 @@ class LinkNoteForm(ModelForm):
         model = LinkNote
         fields = ['title', 'link', 'tags']
 # End Note Forms
+
+
+# News Forms
+class MoonNewsForm(ModelForm):
+    class Meta:
+        model = MoonNews
+        fields = ['title', 'content', 'tags']
+# End News Forms

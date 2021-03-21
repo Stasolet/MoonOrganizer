@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.db.models import Value, CharField
 from django.db.models.functions import Left
@@ -9,7 +9,8 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic.edit import FormView, UpdateView, DeleteView
 
-from core.forms import TextNoteForm, FilmNoteForm, BookNoteForm, ReflectionNoteForm, CalendarNoteForm, LinkNoteForm
+from core.forms import TextNoteForm, FilmNoteForm, BookNoteForm, ReflectionNoteForm, CalendarNoteForm, LinkNoteForm, \
+    MoonNewsForm
 from core.models import MoonNews
 from core.models import TextNote, BookNote, LinkNote, FilmNote, ReflectionNote, CalendarNote, AVAILABLE_NOTES
 from django.contrib.auth.forms import UserCreationForm
@@ -231,14 +232,47 @@ def index(request):
     return render(request, 'core/index.html')
 
 
+# News block
 class MoonNewsListView(ListView):
     paginate_by = 10
     model = MoonNews
 
     def get_queryset(self):
-        return MoonNews.objects.annotate(short_content=Left('content', 300))\
-            .values_list('title', 'published', 'short_content', 'publisher__username', 'tags', named=True)
+        return MoonNews.objects.only('title', 'published', 'content', 'publisher__username', 'tags')\
+            .annotate(short_content=Left('content', 300))
+
+
+class MoonNewsAdd(PermissionRequiredMixin, FormView):
+    permission_required = "core.add_moonnews"
+    success_url = reverse_lazy('core:moonnews-view')
+    form_class = MoonNewsForm
+    template_name = 'core/moonnews_form.html'
+
+    def form_valid(self, form):
+        news = form.save(commit=False)
+        news.publisher = self.request.user
+        news.save()
+        return super().form_valid(form)
+
+
+class MoonNewsDetail(DetailView):
+    model = MoonNews
+
+
+class MoonNewsChange(PermissionRequiredMixin, UpdateView):
+    permission_required = "core.change_moonnews"
+    model = MoonNews
+    succes_url = reverse_lazy('core:moonnews-view')
+    form_class = MoonNewsForm
+
+
+class MoonNewsDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = "core.delete_moonnews"
+    success_url = reverse_lazy('core:moonnews-view')
+    model = MoonNews
+    template_name = 'core/moonnews_delete.html'
 
 
 def world_news(request):
-    return redirect('core:moon_news')
+    return redirect('core:moonnews-view')
+# End News block

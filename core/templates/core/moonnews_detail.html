@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="w3-cell">
+    <div class="w3-panel">
+        <h2 class="w3-black">{{object.title}}</h2>
+        <p>{{object.content}}</p>
+        <div class="w3-container">
+            <p>{{object.publisher}}</p>
+            <p>{{object.tags}}</p>
+            <p>{{object.published}}</p>
+        </div>
+    </div>
+    <div class="w3-container w3-dark-grey w3-cell-bottom">
+        {% if perms.core.change_moonnews %}
+        <a class="w3-button" href="{%  url 'core:moonnews-change' pk=object.pk %}"> Изменить новость </a>
+        {% endif %}
+        {% if perms.core.delete_moonnews %}
+        <a class="w3-button" href="{%  url 'core:moonnews-delete' pk=object.pk %}"> Удалить новость </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

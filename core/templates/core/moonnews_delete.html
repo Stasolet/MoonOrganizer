@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Удаление новости луны{% endblock title %}
+{% block content %}
+    <div class="w3-card">
+        <h2 class="w3-container w3-black">Удаление новости луны</h2>
+        <p>{{ object.title }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="w3-black">
+                <button type="submit" class="w3-button">Удалить</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

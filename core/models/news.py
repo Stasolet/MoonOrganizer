@@ -33,6 +33,9 @@ class MoonNews(News):
         verbose_name = "Новость ресурса"
         verbose_name_plural = 'Новости ресурса'
 
+    def get_absolute_url(self):
+        return reverse('core:moonnews-detail', kwargs={"pk": self.id})
+
 
 class WorldNewsCategory(models.Model):  # возможно от подкатегорий для новостей откажусь
     name = models.CharField(max_length=256, verbose_name="категория")

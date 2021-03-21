@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Authentification
 LOGIN_URL = reverse_lazy('core:login')
 LOGIN_REDIRECT_URL = reverse_lazy('core:notes')
-LOGOUT_REDIRECT_URL = reverse_lazy('core:moon_news')
+LOGOUT_REDIRECT_URL = reverse_lazy('core:moonnews-view')
 
 
 # Internationalization

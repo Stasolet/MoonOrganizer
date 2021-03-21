@@ -1,11 +1,12 @@
 from django.urls import path, include
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
-from .views import index, world_news, MoonNewsListView, NotesListView,\
-    profile, RegistrationUser,\
-    DetailTextNote, DetailLinkNote, DetailBookNote, DetailFilmNote, DetailReflectionNote, DetailCalendarNote,\
-    TextNoteAdd, FilmNoteAdd, BookNoteAdd, CalendarNoteAdd, ReflectionNoteAdd, LinkNoteAdd,\
-    TextNoteChange, LinkNoteChange, FilmNoteChange, BookNoteChange, ReflectionNoteChange, CalendarNoteChange,\
-    TextNoteDelete, LinkNoteDelete, FilmNoteDelete, BookNoteDelete, ReflectionNoteDelete, CalendarNoteDelete
+from .views import index, world_news, MoonNewsListView, NotesListView, \
+    profile, RegistrationUser, \
+    DetailTextNote, DetailLinkNote, DetailBookNote, DetailFilmNote, DetailReflectionNote, DetailCalendarNote, \
+    TextNoteAdd, FilmNoteAdd, BookNoteAdd, CalendarNoteAdd, ReflectionNoteAdd, LinkNoteAdd, \
+    TextNoteChange, LinkNoteChange, FilmNoteChange, BookNoteChange, ReflectionNoteChange, CalendarNoteChange, \
+    TextNoteDelete, LinkNoteDelete, FilmNoteDelete, BookNoteDelete, ReflectionNoteDelete, CalendarNoteDelete, \
+    MoonNewsDetail, MoonNewsAdd, MoonNewsChange, MoonNewsDelete
 
 app_name = 'core'
 
@@ -47,11 +48,11 @@ account_patterns = [
 ]
 # change namespace to news
 news_patterns = [
-    path('moon/', MoonNewsListView.as_view(), name='moonnews'),
-    path('moon/add/', MoonNewsAdd.as_view(), name='moonnews_add'),
-    path('moon/detail/<int:pk>/', MoonNewsDetail.as_view(), name='moonnews_detail'),
-    path('moon/change/<int:pk>/', MoonNewsChange.as_view(), name='moonnews_change'),
-    path('moon/delete/<int:pk>/', MoonNewsDelete.as_view(), name='moonnews_delete'),
+    path('moon/', MoonNewsListView.as_view(), name='moonnews-view'),
+    path('moon/add/', MoonNewsAdd.as_view(), name='moonnews-add'),
+    path('moon/detail/<int:pk>/', MoonNewsDetail.as_view(), name='moonnews-detail'),
+    path('moon/change/<int:pk>/', MoonNewsChange.as_view(), name='moonnews-change'),
+    path('moon/delete/<int:pk>/', MoonNewsDelete.as_view(), name='moonnews-delete'),
     path('world/', world_news, name='worldnews'),
 ]
 
